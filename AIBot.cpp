@@ -20,13 +20,6 @@ AIBot::~AIBot()
 
 void AIBot::Configure(const SConfigData& _configData)
 {
-	for (int i = 0; i < _configData.cmdlineStrArraySize; i++)
-	{
-		auto str = _configData.cmdlineStrArray[i];
-
-		int a = 0;
-	}
-
 	//Instantiate BotLogic Here
 	SetBotLogic(new MyBotLogic());
 
