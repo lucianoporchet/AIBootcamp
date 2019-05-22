@@ -1,6 +1,6 @@
 #pragma once
 
-enum EAIBC2HaxCellType
+enum EHexCellType
 {
 	Goal,
 	Forbidden,
@@ -22,7 +22,7 @@ struct STileInfo
 {
 	int q;
 	int r;
-	EAIBC2HaxCellType type;
+	EHexCellType type;
 };
 
 struct SNPCInfo
