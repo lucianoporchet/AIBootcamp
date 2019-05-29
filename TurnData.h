@@ -8,4 +8,6 @@ struct STurnData
 
 	SNPCInfo* npcInfoArray;
 	int npcInfoArraySize;
+
+	int turnDelay; //in ms
 };
