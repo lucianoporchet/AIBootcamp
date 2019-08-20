@@ -9,7 +9,21 @@ enum EHexCellType
 
 enum EHexCellDirection
 {
-	W, NW, NE, E, SE, SW
+	W, NW, NE, E, SE, SW, CENTER
+};
+
+enum EObjectType
+{
+	Wall,
+	Window,
+	Door,
+	PressurePlate
+};
+
+enum EObjectState
+{
+	Opened,
+	Closed
 };
 
 struct SMoveOrder
@@ -23,6 +37,17 @@ struct STileInfo
 	int q;
 	int r;
 	EHexCellType type;
+};
+
+struct SObjectInfo
+{
+	int uid;
+	int q;
+	int r;
+	EHexCellDirection cellPosition;
+
+	int* types;
+	int typesSize;
 };
 
 struct SNPCInfo

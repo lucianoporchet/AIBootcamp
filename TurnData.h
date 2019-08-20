@@ -1,6 +1,8 @@
 #pragma once
 
 struct SNPCInfo;
+struct SObjectInfo;
+struct STileInfo;
 
 struct STurnData
 {
@@ -8,6 +10,12 @@ struct STurnData
 
 	SNPCInfo* npcInfoArray;
 	int npcInfoArraySize;
+
+	STileInfo* tileInfoArray;
+	int tileInfoArraySize;
+
+	SObjectInfo* objectInfoArray;
+	int objectInfoArraySize;
 
 	int turnDelay; //in ms
 };
