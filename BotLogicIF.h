@@ -5,7 +5,7 @@
 struct SConfigData;
 struct SInitData;
 struct STurnData;
-struct SMoveOrder;
+struct SOrder;
 
 class BotLogicIF
 {
@@ -14,6 +14,6 @@ public:
 
 	virtual void Configure(const SConfigData& _configData) = 0;
 	virtual void Init(const SInitData& _initData) = 0;
-	virtual void GetTurnOrders(const STurnData& _turnData, std::list<SMoveOrder>& _orders) = 0; //calculate orders for a single turn
+	virtual void GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _orders) = 0; //calculate orders for a single turn
 	//virtual void Exit() = 0;
 };

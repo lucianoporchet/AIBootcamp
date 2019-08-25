@@ -10,12 +10,12 @@ MyBotLogic::MyBotLogic()
 	//Write Code Here
 }
 
-/*virtual*/ MyBotLogic::~MyBotLogic()
+MyBotLogic::~MyBotLogic()
 {
 	//Write Code Here
 }
 
-/*virtual*/ void MyBotLogic::Configure(const SConfigData& _configData)
+void MyBotLogic::Configure(const SConfigData& _configData)
 {
 #ifdef BOT_LOGIC_DEBUG
 	mLogger.Init(_configData.logpath, "MyBotLogic.log");
@@ -27,14 +27,16 @@ MyBotLogic::MyBotLogic()
 	//Write Code Here
 }
 
-/*virtual*/ void MyBotLogic::Init(const SInitData& _initData)
+void MyBotLogic::Init(const SInitData& _initData)
 {
 	BOT_LOGIC_LOG(mLogger, "Init", true);
 	
 	//Write Code Here
 }
 
-/*virtual*/ void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SMoveOrder>& _orders)
+void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _orders)
 {
 	BOT_LOGIC_LOG(mLogger, "GetTurnOrders", true);
+
+	//Write Code Here
 }

@@ -26,10 +26,26 @@ enum EObjectState
 	Closed
 };
 
-struct SMoveOrder
+enum EOrderType
 {
+	Move,
+	Interact
+};
+
+enum EInteractionType
+{
+	OpenDoor,
+	CloseDoor,
+	SearchHiddenDoor,
+};
+
+struct SOrder
+{
+	EOrderType orderType;
 	int npcUID;
 	EHexCellDirection direction;
+	int objectUID;
+	EInteractionType interactionType;
 };
 
 struct STileInfo
@@ -48,6 +64,12 @@ struct SObjectInfo
 
 	int* types;
 	int typesSize;
+
+	int* states;
+	int statesSize;
+
+	int* connectedTo;
+	int connectedToSize;
 };
 
 struct SNPCInfo
@@ -55,4 +77,5 @@ struct SNPCInfo
 	int uid;
 	int q;
 	int r;
+	int visionRange;
 };

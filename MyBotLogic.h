@@ -26,7 +26,7 @@ public:
 
 	virtual void Configure(const SConfigData& _configData);
 	virtual void Init(const SInitData& _initData);
-	virtual void GetTurnOrders(const STurnData& _turnData, std::list<SMoveOrder>& _orders);
+	virtual void GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _orders);
 
 protected:
 	Logger mLogger;

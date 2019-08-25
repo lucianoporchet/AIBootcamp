@@ -15,7 +15,7 @@
 struct SConfigData;
 struct SInitData;
 struct STurnData;
-struct SMoveOrder;
+struct SOrder;
 
 class BotLogicIF;
 
@@ -27,7 +27,7 @@ public:
 
 	void Configure(const SConfigData& _configData);
 	void Init(const SInitData& _initData);
-	void GetTurnOrders(const STurnData& _turnData, std::list<SMoveOrder>& _orders);
+	void GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _orders);
 
 	void SetBotLogic(BotLogicIF* _pBotLogic);
 

@@ -37,7 +37,7 @@ void AIBot::Init(const SInitData& _initData)
 	mpBotLogic->Init(_initData);
 }
 
-void AIBot::GetTurnOrders(const STurnData& _turnData, std::list<SMoveOrder>& _orders)
+void AIBot::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _orders)
 {
 	BOT_LOG(mLogger, "GetTurnOrders", true);
 
