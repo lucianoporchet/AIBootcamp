@@ -16,7 +16,9 @@ SET( AIBOT_BUILDFILES
 	CleanAll.bat
 	CMakeLists.txt
 	Filters.cmake
+	PlayLocalMatch.bat
 	rebuild_vis_sln_x64.bat
+	RepairReplayLog.py
 )
 
 SET( AIBOT_HEADERS 
