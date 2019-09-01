@@ -7,6 +7,7 @@ rem Update Configs Here
 
 set AIBOOTCAMP2_ENGINE_DIR=D:\AIBootcamp2\AIBootcamp2\Releases
 set AIBOT_PATH=D:\AIBootcamp2\LesOutardes\build-solution-x64\Debug\lesoutardes.dll
+set TEAM=
 
 rem in s, -1 = default
 set ConnectToProcessDelay=-1
@@ -49,7 +50,7 @@ pause
 
 
 
-"%AIBOOTCAMP2_ENGINE_DIR%/AIBootCamp2.exe" -dllpath %AIBOT_PATH% -mode match -scene %mapname% -replayfile %replayfile% -connecttoprocessdelay %ConnectToProcessDelay% -initdelay %InitTime% -turndelay %TurnTime% -quit -batchmode
+"%AIBOOTCAMP2_ENGINE_DIR%/AIBootCamp2.exe" -dllpath %AIBOT_PATH% -mode match -scene %mapname% -team %team% -replayfile %replayfile% -connecttoprocessdelay %ConnectToProcessDelay% -initdelay %InitTime% -turndelay %TurnTime% -quit -batchmode
 
 echo.
 
