@@ -7,7 +7,7 @@ rem Update Configs Here
 
 set AIBOOTCAMP2_ENGINE_DIR=D:\AIBootcamp2\AIBootcamp2\Releases
 set AIBOT_PATH=D:\AIBootcamp2\LesOutardes\build-solution-x64\Debug\lesoutardes.dll
-set TEAM=
+set TEAM=LesOutardes
 
 rem in s, -1 = default
 set ConnectToProcessDelay=-1
@@ -40,6 +40,7 @@ echo.
 echo    aibootcamp2path       = [%AIBOOTCAMP2_ENGINE_DIR%\AIBootCamp2.exe]
 echo    aibotpath             = [%AIBOT_PATH%]
 echo    mapname               = [%mapname%]
+echo    team                  = [%team%]
 echo    replayfile            = [%replayfile%]
 echo    ConnectToProcessDelay = [%ConnectToProcessDelay%]
 echo    InitTime              = [%InitTime%]
@@ -56,11 +57,19 @@ echo.
 
 if %errorlevel% EQU 0 (
   	echo ==^> Match Completed : Victory!
-) else (
-	echo ==^> Match Completed : Failure
+  	exit /b
 )
 
-@echo off
-python RepairReplayLog.py .\Replays\%loguid%\%loguid%.replay
+if %errorlevel% EQU -1 (
+  	echo ==^> Match Completed : Failure
+
+  	python RepairReplayLog.py .\Replays\%loguid%\%loguid%.replay
+  	exit /b
+)
+
+if %errorlevel% EQU -2 (
+	echo ==^> Invalid Map Name [%mapname%]
+	exit /b
+)
 
 exit /b
