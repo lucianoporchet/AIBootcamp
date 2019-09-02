@@ -16,6 +16,8 @@ SET( AIBOT_BUILDFILES
 	CleanAll.bat
 	CMakeLists.txt
 	Filters.cmake
+	GenSubmit.bat
+	GenSubmit.py
 	PlayLocalMatch.bat
 	rebuild_vis_sln_x64.bat
 	RepairReplayLog.py
