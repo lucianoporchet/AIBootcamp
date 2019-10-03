@@ -19,8 +19,8 @@ SET( AIBOT_BUILDFILES
 	GenSubmit.bat
 	GenSubmit.py
 	PlayLocalMatch.bat
+	PlayLocalMatch.py
 	rebuild_vis_sln_x64.bat
-	RepairReplayLog.py
 )
 
 SET( AIBOT_HEADERS 
