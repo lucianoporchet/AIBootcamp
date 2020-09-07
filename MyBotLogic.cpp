@@ -23,7 +23,6 @@ void MyBotLogic::Configure(const SConfigData& _configData)
 
 	BOT_LOGIC_LOG(mLogger, "Configure", true);
 
-
 	//Write Code Here
 }
 

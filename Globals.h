@@ -29,7 +29,8 @@ enum EObjectState
 enum EOrderType
 {
 	Move,
-	Interact
+	Interact,
+	Jump
 };
 
 enum EInteractionType
