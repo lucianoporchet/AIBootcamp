@@ -35,3 +35,5 @@ jobfiles.txt
 !build-solution-x64/
 build-solution-x64/*
 PlayLocalMatch.bat
+Replays/*
+
