@@ -165,6 +165,9 @@ void MyBotLogic::Init(const SInitData& _initData)
 		}
 	}
 
+	for (int i = 0; i < _initData.objectInfoArraySize; i++) {
+		grid.objects.push_back(_initData.objectInfoArray[i]);
+	}
 
 	
 	//find path for each npc
@@ -173,6 +176,7 @@ void MyBotLogic::Init(const SInitData& _initData)
 		start.q = _initData.npcInfoArray[i].q;
 		start.r = _initData.npcInfoArray[i].r;
 
+
 		//sort goals closest to start first
 		std::sort(begin(goals), end(goals), [&](const Tile& a, const Tile& b) { return heuristic(a, start) < heuristic(b, start); });
 		
@@ -180,6 +184,11 @@ void MyBotLogic::Init(const SInitData& _initData)
 		goal.r = goals[0].r;
 		//reserve goal for a specific npc
 		goals.erase(begin(goals));
+
+		/*if (_initData.objectInfoArraySize > 0) {
+			goal.q = 2;
+			goal.r = -1;
+		}*/
 
 		a_star_search(grid, start, goal, came_from, cost_so_far);
 		List_of_paths.push_back(reconstruct_path(start, goal, came_from));
@@ -210,9 +219,11 @@ void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _o
 			//redo A* to find new path if necessary
 			if (changePath) {
 				Tile goal = List_of_paths[i][0];
-				a_star_search(grid, Tile{ _turnData.npcInfoArray[i].q, _turnData.npcInfoArray[i].r }, List_of_paths[i][0], came_from, cost_so_far);
+				a_star_search(grid, Tile{ _turnData.npcInfoArray[i].q, _turnData.npcInfoArray[i].r }, goal, came_from, cost_so_far);
 				List_of_paths[i].swap(reconstruct_path(Tile{ _turnData.npcInfoArray[i].q, _turnData.npcInfoArray[i].r }, goal, came_from));
 				changePath = false;
+				came_from.clear();
+				cost_so_far.clear();
 			}
 
 

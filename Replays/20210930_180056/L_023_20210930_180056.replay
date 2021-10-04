@@ -1,0 +1,6 @@
+{ 
+"sceneName": "L_023",
+"log": "L_023_20210930_180056.replay",
+"team": "Luciano",
+  "turnsData": [{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[]}],
+  "resultData":{"hasWin":false,"resultPayload":"Invalid Move Order => Unit(43) @(0, 0) moving SW"}}

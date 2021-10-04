@@ -1,0 +1,6 @@
+{ 
+"sceneName": "L_021",
+"log": "L_021_20210930_180540.replay",
+"team": "Luciano",
+  "turnsData": [{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"SE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NE"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"W"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"NW"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]},{"orders":[{"npcId":43,"orderId":0,"orderPayload":"E"}]}],
+  "resultData":{"hasWin":true,"resultPayload":"Congratz!"}}

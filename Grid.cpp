@@ -21,8 +21,49 @@ bool Grid::passable(Tile id) const {
 	return forbidden.find(id) == forbidden.end();
 }
 
+EHexCellDirection Grid::reverseDir(EHexCellDirection dir) const
+{
+	return (EHexCellDirection)((dir + 3) % 6);
+}
+
+EHexCellDirection Grid::getDir(const Tile& t) const {
+
+	if (t.q == 0) {
+		if (t.r == 1)
+			return EHexCellDirection::E;
+		else
+			return EHexCellDirection::W;
+	}
+	else if(t.q == 1){
+		if (t.r == 0)
+			return EHexCellDirection::SE;
+		else
+			return EHexCellDirection::SW;
+	}
+	else{
+		if (t.r == 0) {
+			return EHexCellDirection::NW;
+		}
+		else
+			return EHexCellDirection::NE;
+	}
+}
+
+bool Grid::notObstructed(Tile next,Tile id, EHexCellDirection dir) const{
+	
+	if (!objects.empty()) {
+		for (const auto& obj : objects) {
+			if ((obj.q == next.q && obj.r == next.r && obj.cellPosition == reverseDir(dir))
+				|| (obj.q == id.q && obj.r == id.r && obj.cellPosition == dir)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 std::array<Tile, 6> Grid::DIRS = {
-	/* East, West, North, South */
+	/* SE, NW, W, E, NE, SW */
 	Tile{1, 0}, Tile{-1, 0},
 	Tile{0, -1}, Tile{0, 1}, Tile{-1,1}, Tile{1, -1}
 };
@@ -32,7 +73,7 @@ std::vector<Tile> Grid::neighbors(Tile id) const {
 
 	for (const Tile& dir : DIRS) {
 		Tile next{ id.q + dir.q, id.r + dir.r };
-		if (inBounds(next) && passable(next)) {
+		if (inBounds(next) && passable(next) && notObstructed(next, Tile{ id.q, id.r }, getDir(dir))) {
 			results.push_back(next);
 		}
 	}

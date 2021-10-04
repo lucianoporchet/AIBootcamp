@@ -1,0 +1,6 @@
+{ 
+"sceneName": "L_023",
+"log": "L_023_20210930_180241.replay",
+"team": "Luciano",
+  "turnsData": [{"orders":[]}],
+  "resultData":{"hasWin":false,"resultPayload":"Bot Timout (96278)"}}

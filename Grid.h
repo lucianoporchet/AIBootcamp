@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <string>
+#include "Globals.h"
 
 
 struct Tile {
@@ -57,11 +58,14 @@ struct Grid
 	std::unordered_set<Tile> forbidden;
 	std::unordered_set<Tile> map;
 	std::unordered_set<Tile> reserved;
+	std::vector<SObjectInfo> objects;
 
 	Grid(int width_, int height_, int qb, int rb) : width(width_), height(height_), q_bound(qb), r_bound(rb) {}
 
+	EHexCellDirection reverseDir(EHexCellDirection dir) const;
+	EHexCellDirection getDir(const Tile& t) const;
 
-
+	bool notObstructed(Tile next, Tile id, EHexCellDirection dir) const;
 	bool inBounds(Tile id) const;
 	bool passable(Tile id) const;
 	std::vector<Tile> neighbors(Tile id) const;
