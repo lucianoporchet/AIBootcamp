@@ -179,22 +179,18 @@ void MyBotLogic::Init(const SInitData& _initData)
 
 		//sort goals closest to start first
 		std::sort(begin(goals), end(goals), [&](const Tile& a, const Tile& b) { return heuristic(a, start) < heuristic(b, start); });
-		
-		goal.q = goals[0].q;
-		goal.r = goals[0].r;
-		//reserve goal for a specific npc
-		goals.erase(begin(goals));
-
-		/*if (_initData.objectInfoArraySize > 0) {
-			goal.q = 2;
-			goal.r = -1;
-		}*/
-
-		a_star_search(grid, start, goal, came_from, cost_so_far);
-		List_of_paths.push_back(reconstruct_path(start, goal, came_from));
-
-		came_from.clear();
-		cost_so_far.clear();
+		for (auto g : goals) {
+			goal.q = g.q;
+			goal.r = g.r;
+			a_star_search(grid, start, goal, came_from, cost_so_far);
+			if (came_from.find(goal) != came_from.end()) {
+				List_of_paths.push_back(reconstruct_path(start, goal, came_from));
+				came_from.clear();
+				cost_so_far.clear();
+				goals.erase(std::remove(goals.begin(), goals.end(), g), goals.end());
+				break;
+			}
+		}
 	}
 
 }
@@ -263,13 +259,3 @@ void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _o
 
 
 }
-
-
-
-/*
-	Possible improvements:
-		
-		run in release lol
-		See if a goal is in the path an npc from init so no need to redo A_star
-		
-*/
