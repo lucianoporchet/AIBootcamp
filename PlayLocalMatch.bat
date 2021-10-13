@@ -11,7 +11,7 @@ rem set AIBOT_PATH=D:\AIBootcamp2\LesOutardes\build-solution-x64\Debug\lesoutard
 rem set TEAM=LesOutardes
 
 set AIBOOTCAMP2_ENGINE_DIR=C:\Users\porl2001\Desktop\AI\AIBootCamp2-2021\AIBootCamp2-2021\Releases
-set AIBOT_PATH=C:\Users\porl2001\Desktop\AI\AIBootCamp2-MyFirstAIBot-2021\AIBootCamp2-MyFirstAIBot-2021\AIBootCamp2-MyFirstAIBot\build-solution-x64\Debug\myfirstaibot.dll
+set AIBOT_PATH=C:\Users\porl2001\Desktop\AI\AIBootCamp2-MyFirstAIBot-2021\AIBootCamp\build-solution-x64\Debug\myfirstaibot.dll
 set TEAM=Luciano
 
 rem in s, -1 = default
