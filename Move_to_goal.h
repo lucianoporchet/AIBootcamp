@@ -4,6 +4,6 @@
 class Move_to_goal : public Task
 {
 public:
-	status run(std::list<SOrder>& _orders, int, const STurnData&) override;
+	status run(std::list<SOrder>& _orders, int, const STurnData&, Logger&) override;
 };
 

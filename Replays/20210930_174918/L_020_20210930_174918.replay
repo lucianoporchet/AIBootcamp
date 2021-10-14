@@ -1,6 +1,0 @@
-{ 
-"sceneName": "L_020",
-"log": "L_020_20210930_174918.replay",
-"team": "Luciano",
-  "turnsData": [{"orders":[{"npcId":60,"orderId":0,"orderPayload":"SW"}]},{"orders":[{"npcId":60,"orderId":0,"orderPayload":"W"}]}],
-  "resultData":{"hasWin":true,"resultPayload":"Congratz!"}}

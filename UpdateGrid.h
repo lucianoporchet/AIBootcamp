@@ -4,6 +4,6 @@
 class UpdateGrid : public Task
 {
 public:
-	status run(std::list<SOrder>&, int, const STurnData& turnInfo) override;
+	status run(std::list<SOrder>&, int, const STurnData& turnInfo, Logger&) override;
 };
 

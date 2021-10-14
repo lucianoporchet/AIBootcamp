@@ -56,22 +56,27 @@ void MyBotLogic::Init(const SInitData& _initData)
 	//BOT_LOGIC_LOG(mLogger, "Init", true);
 	//auto t = high_resolution_clock::now();
 	omniscient = _initData.omniscient;
-	
-	grid.npc_states.assign(_initData.nbNPCs, State::MOVE);
+
 
 	grid.InitGrid(_initData);
 	//result = high_resolution_clock::now() - t;
 	behaviourTree = Selector(
 						new Sequence(
+							new UpdateGrid(),
 							new HasPath(),
-							new Move_to_goal()), 
+							new Move_to_goal()
+						), 
 						new Sequence(
+							new UpdateGrid(),
 							new NewGoalVisible(), 
 							new A_star_to_goal(), 
-							new Move_to_goal()), 
+							new Move_to_goal() 
+						),
 						new Sequence(
-							new Move_to_next(), 
-							new UpdateGrid()));
+							new UpdateGrid(),
+							new Move_to_next()
+						)
+					);
 	
 }
 
@@ -136,8 +141,9 @@ void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _o
 			}
 		}
 		else {
-
-			behaviourTree.run(_orders, i, _turnData);
+			BOT_LOGIC_LOG(mLogger, "GetTurnOrders", true);
+			grid.newGoal = false;
+			behaviourTree.run(_orders, i, _turnData, mLogger);
 		}
 	}
 

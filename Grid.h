@@ -63,7 +63,8 @@ private:
 	int width, height, q_bound, r_bound;
 	std::unordered_set<Tile> forbidden;
 	std::unordered_set<Tile> map;
-	std::unordered_set<Tile> visited;
+	std::vector<std::vector<Tile>> visited;
+	std::unordered_set<Tile> reserved_goals;
 	std::vector<SObjectInfo> objects;
 public:
 	Grid(const Grid&) = delete;
@@ -85,19 +86,23 @@ public:
 	EHexCellDirection reverseDir(EHexCellDirection dir) const;
 	EHexCellDirection getDir(const Tile& t) const;
 	bool notObstructed(Tile next, Tile id, EHexCellDirection dir) const;
-	bool inBounds(Tile id) const;
-	bool passable(Tile id) const;
+	bool inBounds(const Tile& id) const;
+	bool passable(const Tile& id) const;
 	bool isReserved(const Tile& t);
-	bool wasVisited(Tile& a);
+	bool wasVisited(const Tile& a, int i);
+	bool freeGoal(const Tile& t) const;
 	std::vector<Tile> neighbors(Tile id) const;
 	inline void reserveNext(Tile a) {
 		reserved.insert(a);
 	}
-	inline void visitNext(Tile a) {
-		visited.insert(a);
+	inline void visitNext(Tile a, int i) {
+		visited[i].push_back(a);
 	}
 	inline void addForbidden(Tile t) {
 		forbidden.insert(t);
+	}
+	inline void reserveGoal(Tile a) {
+		reserved_goals.insert(a);
 	}
 	static Grid& get();
 };

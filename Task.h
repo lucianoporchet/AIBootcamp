@@ -3,6 +3,7 @@
 #include <iterator>
 #include "Grid.h"
 #include "Globals.h"
+#include "Logger.h"
 
 enum class status
 {
@@ -11,5 +12,5 @@ enum class status
 
 class Task {
 public:
-	virtual status run(std::list<SOrder>&, int, const STurnData&) { return status::FAILURE; };
+	virtual status run(std::list<SOrder>&, int, const STurnData&, Logger&) { return status::FAILURE; };
 };

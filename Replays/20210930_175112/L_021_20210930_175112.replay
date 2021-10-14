@@ -1,6 +1,0 @@
-{ 
-"sceneName": "L_021",
-"log": "L_021_20210930_175112.replay",
-"team": "Luciano",
-  "turnsData": [{"orders":[]}],
-  "resultData":{"hasWin":false,"resultPayload":"Invalid Move Order => Unit(43) @(2, 1) moving NE"}}

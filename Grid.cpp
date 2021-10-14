@@ -11,18 +11,37 @@ bool operator!=(Tile a, Tile b) {
 bool operator<(Tile a, Tile b) {
 	return std::tie(a.q, a.r) < std::tie(b.q, b.r);
 }
-bool Grid::inBounds(Tile id) const {
+
+
+bool Grid::inBounds(const Tile& id) const {
 	return map.find(id) != map.end();
 }
-bool Grid::passable(Tile id) const {
+bool Grid::passable(const Tile& id) const {
 	return forbidden.find(id) == forbidden.end();
+}
+bool Grid::freeGoal(const Tile& t) const {
+	return reserved_goals.find(t) == reserved_goals.end();
+}
+bool Grid::isReserved(const Tile& t) {
+	return reserved.find(t) != reserved.end();
+}
+
+bool Grid::wasVisited(const Tile& a, int i) {
+	return std::find(begin(visited[i]), end(visited[i]), a) != end(visited[i]);
 }
 
 void Grid::InitGrid(const SInitData& _initData) {
+	
+	npc_states.assign(_initData.nbNPCs, State::MOVE);
 	int q, r;
 	Tile goal{ 0,0 }, start{ 0,0 };
 	width = _initData.colCount;
 	height = _initData.rowCount;
+
+	std::vector<Tile> v;
+	for (int i = 0; i < _initData.nbNPCs; ++i) {
+		visited.push_back(v);
+	}
 
 	for (int i = 0; i < _initData.tileInfoArraySize; i++) {
 		q = _initData.tileInfoArray[i].q;
@@ -44,6 +63,7 @@ void Grid::InitGrid(const SInitData& _initData) {
 
 			start.q = _initData.npcInfoArray[i].q;
 			start.r = _initData.npcInfoArray[i].r;
+			visitNext(start, i);
 
 			//sort goals closest to start first
 			std::sort(begin(goals), end(goals), [&](const Tile& a, const Tile& b) { return heuristic(a, start) < heuristic(b, start); });
@@ -66,7 +86,6 @@ void Grid::InitGrid(const SInitData& _initData) {
 
 void Grid::updateGrid(const STurnData& turnInfo) {
 	int temp = goals.size(), q, r;
-	newGoal = false;
 	for (int i = 0; i < turnInfo.tileInfoArraySize; i++) {
 		q = turnInfo.tileInfoArray[i].q;
 		r = turnInfo.tileInfoArray[i].r;
@@ -74,7 +93,7 @@ void Grid::updateGrid(const STurnData& turnInfo) {
 		if (turnInfo.tileInfoArray[i].type == EHexCellType::Forbidden) {
 			forbidden.insert(Tile{ q,r });
 		}
-		if (turnInfo.tileInfoArray[i].type == EHexCellType::Goal) {
+		if (turnInfo.tileInfoArray[i].type == EHexCellType::Goal && freeGoal(Tile{ turnInfo.tileInfoArray[i].q, turnInfo.tileInfoArray[i].r })) {
 			goals.push_back(Tile{turnInfo.tileInfoArray[i].q, turnInfo.tileInfoArray[i].r });
 		}
 	}
@@ -135,7 +154,7 @@ std::vector<Tile> Grid::neighbors(Tile id) const {
 	std::vector<Tile> results;
 	for (const Tile& dir : DIRS) {
 		Tile next{ id.q + dir.q, id.r + dir.r };
-		if (inBounds(next) && passable(next) && notObstructed(next, Tile{ id.q, id.r }, getDir(dir))) {
+		if (inBounds(next) && passable(next) && notObstructed(next, Tile{ id.q, id.r }, getDir(dir)) && freeGoal(next)) {
 			results.push_back(next);
 		}
 	}
@@ -145,14 +164,7 @@ std::vector<Tile> Grid::neighbors(Tile id) const {
 	return results;
 }
 
-bool Grid::isReserved(const Tile& t){
 
-	return !(reserved.find(t) == reserved.end());
-}
-
-bool Grid::wasVisited(Tile& a) {
-	return !(visited.find(a) == visited.end());
-}
 
 Grid& Grid::get() {
 	static Grid instance;
