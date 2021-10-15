@@ -29,6 +29,9 @@ bool Grid::isReserved(const Tile& t) {
 bool Grid::wasVisited(const Tile& a, int i) {
 	return std::find(begin(visited[i]), end(visited[i]), a) != end(visited[i]);
 }
+bool Grid::isDeadEnd(const Tile& t) {
+	return deadEnd.find(t) != deadEnd.end();
+}
 
 void Grid::InitGrid(const SInitData& _initData) {
 	
@@ -37,12 +40,12 @@ void Grid::InitGrid(const SInitData& _initData) {
 	Tile goal{ 0,0 }, start{ 0,0 };
 	width = _initData.colCount;
 	height = _initData.rowCount;
-
 	std::vector<Tile> v;
 	for (int i = 0; i < _initData.nbNPCs; ++i) {
+		v.push_back(Tile{_initData.npcInfoArray[i].q, _initData.npcInfoArray[i].r});
 		visited.push_back(v);
+		List_of_paths.push_back(std::vector<Tile>{});
 	}
-
 	for (int i = 0; i < _initData.tileInfoArraySize; i++) {
 		q = _initData.tileInfoArray[i].q;
 		r = _initData.tileInfoArray[i].r;
@@ -57,31 +60,7 @@ void Grid::InitGrid(const SInitData& _initData) {
 	for (int i = 0; i < _initData.objectInfoArraySize; i++) {
 		objects.push_back(_initData.objectInfoArray[i]);
 	}
-	if (_initData.omniscient) {
-		//find path for each npc
-		for (int i = 0; i < _initData.nbNPCs; i++) {
-
-			start.q = _initData.npcInfoArray[i].q;
-			start.r = _initData.npcInfoArray[i].r;
-			visitNext(start, i);
-
-			//sort goals closest to start first
-			std::sort(begin(goals), end(goals), [&](const Tile& a, const Tile& b) { return heuristic(a, start) < heuristic(b, start); });
-
-			for (auto g : goals) {
-				goal.q = g.q;
-				goal.r = g.r;
-				a_star_search(*this, start, goal, came_from, cost_so_far);
-				if (came_from.find(goal) != came_from.end()) {
-					List_of_paths.push_back(reconstruct_path(start, goal, came_from));
-					came_from.clear();
-					cost_so_far.clear();
-					goals.erase(std::remove(goals.begin(), goals.end(), g), goals.end());
-					break;
-				}
-			}
-		}
-	}
+	if (goals.size() == 0) newGoal = false;
 }
 
 void Grid::updateGrid(const STurnData& turnInfo) {
@@ -154,7 +133,7 @@ std::vector<Tile> Grid::neighbors(Tile id) const {
 	std::vector<Tile> results;
 	for (const Tile& dir : DIRS) {
 		Tile next{ id.q + dir.q, id.r + dir.r };
-		if (inBounds(next) && passable(next) && notObstructed(next, Tile{ id.q, id.r }, getDir(dir)) && freeGoal(next)) {
+		if (inBounds(next) && passable(next) && notObstructed(next, Tile{ id.q, id.r }, getDir(dir))) {
 			results.push_back(next);
 		}
 	}

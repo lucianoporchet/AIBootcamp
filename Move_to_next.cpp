@@ -12,6 +12,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 	std::vector<Tile> neighbors = grid.neighbors(pos);
 	int size = neighbors.size();
 	int c = 0;
+	if (size == 1) grid.addDeadEnd(pos);
 
 	for (auto n : neighbors) {
 		if (!grid.wasVisited(n, index)) {
@@ -21,22 +22,17 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 		}
 		++c;
 	}
-
 	l.Log(std::to_string(size), true);
-
 	
-
 	if (c == size) {
-		next = neighbors.back();
-		dir = Tile{ next.q - pos.q, next.r - pos.r };
+		for (auto n : neighbors) {
+			if (!grid.isDeadEnd(n)) {
+				next = n;
+				dir = Tile{ next.q - pos.q, next.r - pos.r };
+			}
+		}
 	}
-
-	
-
-
-	//Move
 	//choose npc state
-
 	if (grid.isReserved(next)) {
 
 		grid.npc_states[index] = State::BLOQUED;
@@ -57,7 +53,5 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 		_orders.push_back(SOrder{ EOrderType::Move, _turnData.npcInfoArray[index].uid, EHexCellDirection::CENTER });
 		break;
 	}
-
-	if (size == 1) grid.addForbidden(pos);
 	return status::SUCCESS;
 }

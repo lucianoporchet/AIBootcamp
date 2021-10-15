@@ -27,7 +27,12 @@ status Move_to_goal::run(std::list<SOrder>& _orders, int i, const STurnData& _tu
 		else
 			grid.npc_states[i] = State::MOVE;
 
-
+		for(auto g : grid.List_of_paths){
+			if (!g.empty()) {
+				l.Log(std::to_string(g.back().q) + ' ' + std::to_string(g.back().r), true);
+			}
+		}
+		
 		//final state machine
 		switch (grid.npc_states[i])
 		{
@@ -40,8 +45,8 @@ status Move_to_goal::run(std::list<SOrder>& _orders, int i, const STurnData& _tu
 			break;
 		case State::ARRIVED:
 			grid.reserveNext(grid.List_of_paths[i].back());
+			grid.addForbidden(grid.List_of_paths[i][0]);
 			if (goalInPath(grid.List_of_paths, grid.List_of_paths[i][0], i)) {
-				grid.addForbidden(grid.List_of_paths[i][0]);
 				grid.changePath = true;
 			}
 			_orders.push_back(SOrder{ EOrderType::Move, _turnData.npcInfoArray[i].uid, chooseDirection(grid.List_of_paths[i], _turnData.npcInfoArray[i]) });

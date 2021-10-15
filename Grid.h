@@ -66,6 +66,7 @@ private:
 	std::vector<std::vector<Tile>> visited;
 	std::unordered_set<Tile> reserved_goals;
 	std::vector<SObjectInfo> objects;
+	std::unordered_set<Tile> deadEnd;
 public:
 	Grid(const Grid&) = delete;
 	Grid& operator=(const Grid&) = delete;
@@ -78,7 +79,7 @@ public:
 	std::unordered_map<Tile, int> cost_so_far;
 	std::vector<std::vector<Tile>> List_of_paths;
 	std::vector<State> npc_states;
-	bool changePath = false;
+	bool changePath = true;
 	int nextDir = 0;
 public:
 	void InitGrid(const SInitData& _initData);
@@ -91,6 +92,7 @@ public:
 	bool isReserved(const Tile& t);
 	bool wasVisited(const Tile& a, int i);
 	bool freeGoal(const Tile& t) const;
+	bool isDeadEnd(const Tile& t);
 	std::vector<Tile> neighbors(Tile id) const;
 	inline void reserveNext(Tile a) {
 		reserved.insert(a);
@@ -103,6 +105,9 @@ public:
 	}
 	inline void reserveGoal(Tile a) {
 		reserved_goals.insert(a);
+	}
+	inline void addDeadEnd(Tile a) {
+		deadEnd.insert(a);
 	}
 	static Grid& get();
 };
