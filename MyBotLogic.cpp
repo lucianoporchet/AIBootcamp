@@ -16,7 +16,7 @@
 #include "Move_to_goal.h"
 #include "Move_to_next.h"
 
-#include <chrono>
+//#include <chrono>
 //using namespace std::chrono;
 
 
@@ -47,17 +47,12 @@ void MyBotLogic::Configure(const SConfigData& _configData)
 
 Grid& grid = Grid::get();
 Selector behaviourTree;
-bool omniscient;
-
 //nanoseconds result;
 void MyBotLogic::Init(const SInitData& _initData)
 {
 	
 	//BOT_LOGIC_LOG(mLogger, "Init", true);
 	//auto t = high_resolution_clock::now();
-	omniscient = _initData.omniscient;
-	omniscient = false;
-
 	grid.InitGrid(_initData);
 	//result = high_resolution_clock::now() - t;
 	behaviourTree = Selector(
@@ -77,7 +72,6 @@ void MyBotLogic::Init(const SInitData& _initData)
 							new Move_to_next()
 						)
 					);
-	
 }
 
 
@@ -94,6 +88,4 @@ void MyBotLogic::GetTurnOrders(const STurnData& _turnData, std::list<SOrder>& _o
 		grid.newGoal = false;
 		behaviourTree.run(_orders, i, _turnData, mLogger);
 	}
-
-
 }

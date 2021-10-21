@@ -12,17 +12,14 @@ void a_star_search(
 
 	PriorityQueue<Location, int> frontier;
 	frontier.put(start, 0);
-
 	came_from[start] = start;
 	cost_so_far[start] = 0;
 
 	while (!frontier.empty()) {
 		Location current = frontier.get();
-
 		if (current == goal) {
 			break;
 		}
-
 		for (Location next : graph.neighbors(current)) {
 			int new_cost = cost_so_far[current] + 1;
 			if (cost_so_far.find(next) == cost_so_far.end() || new_cost < cost_so_far[next]) {

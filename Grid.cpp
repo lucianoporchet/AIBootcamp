@@ -25,7 +25,6 @@ bool Grid::freeGoal(const Tile& t) const {
 bool Grid::isReserved(const Tile& t) {
 	return reserved.find(t) != reserved.end();
 }
-
 bool Grid::wasVisited(const Tile& a, int i) {
 	return std::find(begin(visited[i]), end(visited[i]), a) != end(visited[i]);
 }
@@ -34,7 +33,6 @@ bool Grid::isDeadEnd(const Tile& t) {
 }
 
 void Grid::InitGrid(const SInitData& _initData) {
-	
 	npc_states.assign(_initData.nbNPCs, State::MOVE);
 	int q, r;
 	Tile goal{ 0,0 }, start{ 0,0 };
@@ -129,7 +127,6 @@ std::array<Tile, 6> Grid::DIRS = {
 };
 
 std::vector<Tile> Grid::neighbors(Tile id) const {
-	
 	std::vector<Tile> results;
 	for (const Tile& dir : DIRS) {
 		Tile next{ id.q + dir.q, id.r + dir.r };
@@ -142,8 +139,6 @@ std::vector<Tile> Grid::neighbors(Tile id) const {
 	}
 	return results;
 }
-
-
 
 Grid& Grid::get() {
 	static Grid instance;
@@ -186,10 +181,8 @@ EHexCellDirection chooseDirection(std::vector<Tile>& path, SNPCInfo& npc) {
 }
 
 EHexCellDirection nextDirection(EHexCellDirection dir) {
-
 	return (EHexCellDirection)((dir + 1) % 6);
 }
-
 
 bool goalInPath(const std::vector<std::vector<Tile>>& list_path, const Tile& goal, int index) {
 

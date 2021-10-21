@@ -94,6 +94,7 @@ public:
 	bool freeGoal(const Tile& t) const;
 	bool isDeadEnd(const Tile& t);
 	std::vector<Tile> neighbors(Tile id) const;
+
 	inline void reserveNext(Tile a) {
 		reserved.insert(a);
 	}
@@ -109,6 +110,7 @@ public:
 	inline void addDeadEnd(Tile a) {
 		deadEnd.insert(a);
 	}
+	
 	static Grid& get();
 };
 

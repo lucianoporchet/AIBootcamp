@@ -10,7 +10,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 	Tile next{ 0,0 };
 
 	std::vector<Tile> neighbors = grid.neighbors(pos);
-	int size = neighbors.size();
+	int size = static_cast<int>(neighbors.size());
 	int c = 0;
 	if (size == 1) grid.addDeadEnd(pos);
 
@@ -21,9 +21,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 			break;
 		}
 		++c;
-	}
-	l.Log(std::to_string(size), true);
-	
+	}	
 	if (c == size) {
 		for (auto n : neighbors) {
 			if (!grid.isDeadEnd(n)) {
