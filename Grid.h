@@ -11,8 +11,14 @@
 #include <algorithm>
 #include <cstdlib>
 #include <string>
-#include "Globals.h"
 
+#include "Globals.h"
+#include "InitData.h"
+#include "TurnData.h"
+
+enum class State {
+	MOVE, BLOQUED, ARRIVED
+};
 
 struct Tile {
 	int q, r;
@@ -39,11 +45,9 @@ struct PriorityQueue {
 	inline bool empty() const {
 		return elements.empty();
 	}
-
 	inline void put(T item, priority_t priority) {
 		elements.emplace(priority, item);
 	}
-
 	T get() {
 		T best_item = elements.top().second;
 		elements.pop();
@@ -53,29 +57,63 @@ struct PriorityQueue {
 
 struct Grid
 {
-	static std::array<Tile, 6> DIRS;
+
+private:
+	Grid() : width{ 0 }, height{ 0 }, q_bound{ 0 }, r_bound{ 0 }, newGoal{ false }{}
 	int width, height, q_bound, r_bound;
 	std::unordered_set<Tile> forbidden;
 	std::unordered_set<Tile> map;
-	std::unordered_set<Tile> reserved;
+	std::vector<std::vector<Tile>> visited;
+	std::unordered_set<Tile> reserved_goals;
 	std::vector<SObjectInfo> objects;
+	std::unordered_set<Tile> deadEnd;
+public:
+	Grid(const Grid&) = delete;
+	Grid& operator=(const Grid&) = delete;
 
-	Grid(int width_, int height_, int qb, int rb) : width(width_), height(height_), q_bound(qb), r_bound(rb) {}
-
+	static std::array<Tile, 6> DIRS;
+	std::unordered_set<Tile> reserved;
+	bool newGoal;
+	std::vector<Tile> goals;
+	std::unordered_map<Tile, Tile> came_from;
+	std::unordered_map<Tile, int> cost_so_far;
+	std::vector<std::vector<Tile>> List_of_paths;
+	std::vector<State> npc_states;
+	bool changePath = true;
+	int nextDir = 0;
+public:
+	void InitGrid(const SInitData& _initData);
+	void updateGrid(const STurnData& turnInfo);
 	EHexCellDirection reverseDir(EHexCellDirection dir) const;
 	EHexCellDirection getDir(const Tile& t) const;
-
 	bool notObstructed(Tile next, Tile id, EHexCellDirection dir) const;
-	bool inBounds(Tile id) const;
-	bool passable(Tile id) const;
+	bool inBounds(const Tile& id) const;
+	bool passable(const Tile& id) const;
+	bool isReserved(const Tile& t);
+	bool wasVisited(const Tile& a, int i);
+	bool freeGoal(const Tile& t) const;
+	bool isDeadEnd(const Tile& t);
 	std::vector<Tile> neighbors(Tile id) const;
-	bool isReserved(std::vector<Tile>& path);
 
-	inline void reserveNext(std::vector<Tile>& path) {
-		reserved.emplace(path.back());
+	inline void reserveNext(Tile a) {
+		reserved.insert(a);
 	}
-
-	static void addForbidden(Grid& grid, Tile t);
+	inline void visitNext(Tile a, int i) {
+		visited[i].push_back(a);
+	}
+	inline void addForbidden(Tile t) {
+		forbidden.insert(t);
+	}
+	inline void reserveGoal(Tile a) {
+		reserved_goals.insert(a);
+	}
+	inline void addDeadEnd(Tile a) {
+		deadEnd.insert(a);
+	}
 	
+	static Grid& get();
 };
 
+EHexCellDirection chooseDirection(std::vector<Tile>& path, SNPCInfo& npc);
+EHexCellDirection nextDirection(EHexCellDirection dir);
+bool goalInPath(const std::vector<std::vector<Tile>>& list_path, const Tile& goal, int index);
