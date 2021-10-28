@@ -43,6 +43,8 @@ void Grid::InitGrid(const SInitData& _initData) {
 		v.push_back(Tile{_initData.npcInfoArray[i].q, _initData.npcInfoArray[i].r});
 		visited.push_back(v);
 		List_of_paths.push_back(std::vector<Tile>{});
+		List_of_intermediate_paths.push_back(std::vector<Tile>{});
+		to_visit.push_back(std::stack<Tile>{});
 	}
 	for (int i = 0; i < _initData.tileInfoArraySize; i++) {
 		q = _initData.tileInfoArray[i].q;

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <string>
+#include <stack>
 
 #include "Globals.h"
 #include "InitData.h"
@@ -78,9 +79,11 @@ public:
 	std::unordered_map<Tile, Tile> came_from;
 	std::unordered_map<Tile, int> cost_so_far;
 	std::vector<std::vector<Tile>> List_of_paths;
+	std::vector<std::vector<Tile>> List_of_intermediate_paths;
 	std::vector<State> npc_states;
 	bool changePath = true;
 	int nextDir = 0;
+	std::vector<std::stack<Tile>> to_visit;
 public:
 	void InitGrid(const SInitData& _initData);
 	void updateGrid(const STurnData& turnInfo);

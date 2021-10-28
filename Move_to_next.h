@@ -1,5 +1,6 @@
 #pragma once
 #include "Task.h"
+#include "A_star.h"
 class Move_to_next : public Task
 {
 
