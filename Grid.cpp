@@ -28,6 +28,9 @@ bool Grid::isReserved(const Tile& t) {
 bool Grid::wasVisited(const Tile& a, int i) {
 	return std::find(begin(visited[i]), end(visited[i]), a) != end(visited[i]);
 }
+bool Grid::wasVisitedAllNPC(const Tile& a) {
+	return visited_all_npc.find(a) != visited_all_npc.end();
+}
 bool Grid::isDeadEnd(const Tile& t) {
 	return deadEnd.find(t) != deadEnd.end();
 }
@@ -42,6 +45,7 @@ void Grid::InitGrid(const SInitData& _initData) {
 	for (int i = 0; i < _initData.nbNPCs; ++i) {
 		v.push_back(Tile{_initData.npcInfoArray[i].q, _initData.npcInfoArray[i].r});
 		visited.push_back(v);
+		visited_all_npc.insert(Tile{ _initData.npcInfoArray[i].q, _initData.npcInfoArray[i].r });
 		List_of_paths.push_back(std::vector<Tile>{});
 		List_of_intermediate_paths.push_back(std::vector<Tile>{});
 		to_visit.push_back(std::stack<Tile>{});

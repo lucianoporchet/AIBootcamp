@@ -18,10 +18,18 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 		next = grid.List_of_intermediate_paths[index].back();
 	}
 	else {
+		std::vector<Tile> nevervisited{};
 		for (auto n : neighbors) {
-			if (!grid.wasVisited(n, index)) {
+			if (!grid.wasVisitedAllNPC(n)) {
+				nevervisited.push_back(n);
+			}
+			else if (!grid.wasVisited(n, index)) {
 				grid.to_visit[index].push(n);
 			}
+		}
+
+		for (auto nv : nevervisited) {
+			grid.to_visit[index].push(nv);
 		}
 
 		next_goal = grid.to_visit[index].top();
@@ -50,6 +58,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 	else
 	{
 		grid.npc_states[index] = State::MOVE;
+		l.Log(std::to_string(grid.List_of_intermediate_paths[index].back().q) + ' ' + std::to_string(grid.List_of_intermediate_paths[index].back().r));
 		grid.List_of_intermediate_paths[index].pop_back();
 	}
 
@@ -63,7 +72,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 		_orders.push_back(SOrder{ EOrderType::Move, _turnData.npcInfoArray[index].uid, grid.getDir(dir) });
 		break;
 	case State::BLOQUED:
-		//_orders.push_back(SOrder{ EOrderType::Move, _turnData.npcInfoArray[index].uid, EHexCellDirection::CENTER });
+		_orders.push_back(SOrder{ EOrderType::Move, _turnData.npcInfoArray[index].uid, EHexCellDirection::CENTER });
 		break;
 	}
 	return status::SUCCESS;

@@ -84,6 +84,7 @@ public:
 	bool changePath = true;
 	int nextDir = 0;
 	std::vector<std::stack<Tile>> to_visit;
+	std::unordered_set<Tile> visited_all_npc;
 public:
 	void InitGrid(const SInitData& _initData);
 	void updateGrid(const STurnData& turnInfo);
@@ -94,6 +95,7 @@ public:
 	bool passable(const Tile& id) const;
 	bool isReserved(const Tile& t);
 	bool wasVisited(const Tile& a, int i);
+	bool wasVisitedAllNPC(const Tile& a);
 	bool freeGoal(const Tile& t) const;
 	bool isDeadEnd(const Tile& t);
 	std::vector<Tile> neighbors(Tile id) const;
@@ -103,6 +105,7 @@ public:
 	}
 	inline void visitNext(Tile a, int i) {
 		visited[i].push_back(a);
+		visited_all_npc.insert(a);
 	}
 	inline void addForbidden(Tile t) {
 		forbidden.insert(t);
