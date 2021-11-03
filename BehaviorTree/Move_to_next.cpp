@@ -57,7 +57,6 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 	else
 	{
 		grid.npc_states[index] = State::MOVE;
-		l.Log(std::to_string(grid.List_of_intermediate_paths[index].back().q) + ' ' + std::to_string(grid.List_of_intermediate_paths[index].back().r));
 		grid.List_of_intermediate_paths[index].pop_back();
 	}
 

@@ -26,11 +26,6 @@ status Move_to_goal::run(std::list<SOrder>& _orders, int i, const STurnData& _tu
 		else
 			grid.npc_states[i] = State::MOVE;
 
-		for(auto g : grid.List_of_paths){
-			if (!g.empty()) {
-				l.Log(std::to_string(g.back().q) + ' ' + std::to_string(g.back().r), true);
-			}
-		}
 		
 		//final state machine
 		switch (grid.npc_states[i])
