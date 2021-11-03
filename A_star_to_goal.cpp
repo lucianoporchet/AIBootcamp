@@ -2,7 +2,6 @@
 
 
 status A_star_to_goal::run(std::list<SOrder>&, int index, const STurnData& turnInfo, Logger& l) {
-	l.Log("A to goal");
 	Tile pos{ turnInfo.npcInfoArray[index].q, turnInfo.npcInfoArray[index].r };
 	Grid& grid = Grid::get();
 
