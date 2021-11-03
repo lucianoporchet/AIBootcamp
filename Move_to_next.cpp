@@ -2,7 +2,6 @@
 
 status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData& _turnData, Logger& l)
 {
-	l.Log("Move to next", true);
 	Grid& grid = Grid::get();
 
 	Tile pos = Tile{ _turnData.npcInfoArray[index].q, _turnData.npcInfoArray[index].r };
@@ -12,7 +11,7 @@ status Move_to_next::run(std::list<SOrder>& _orders, int index, const STurnData&
 
 	std::vector<Tile> neighbors = grid.neighbors(pos);
 	int size = static_cast<int>(neighbors.size());
-	//int c = 0;
+
 	if (size == 1) grid.addDeadEnd(pos);
 	if (!grid.List_of_intermediate_paths[index].empty()) {
 		next = grid.List_of_intermediate_paths[index].back();

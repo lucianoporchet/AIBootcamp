@@ -2,7 +2,6 @@
 
 status Move_to_goal::run(std::list<SOrder>& _orders, int i, const STurnData& _turnData, Logger& l)
 {
-	l.Log("Move to goal", true);
 	Grid& grid = Grid::get();
 	
 	if (!grid.List_of_paths[i].empty()) {

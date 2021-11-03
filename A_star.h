@@ -40,7 +40,5 @@ std::vector<Location> reconstruct_path(Location start, Location goal, std::unord
 		path.push_back(current);
 		current = came_from[current];
 	}
-	//path.push_back(start);
-	//std::reverse(path.begin(), path.end());
 	return path;
 }
