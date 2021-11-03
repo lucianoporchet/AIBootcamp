@@ -2,6 +2,8 @@
 
 #include "BotLogicIF.h"
 #include "Logger.h"
+#include "Grid.h"
+#include "Selector.h"
 
 #ifdef _DEBUG
 #define BOT_LOGIC_DEBUG
@@ -30,4 +32,8 @@ public:
 
 protected:
 	Logger mLogger;
+
+
+	Grid& grid = Grid::get();
+	Selector behaviourTree;
 };

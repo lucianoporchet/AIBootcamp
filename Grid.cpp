@@ -151,6 +151,25 @@ Grid& Grid::get() {
 	return instance;
 }
 
+
+void Grid::reserveNext(Tile a) {
+	reserved.insert(a);
+}
+void Grid::visitNext(Tile a, int i) {
+	visited[i].push_back(a);
+	visited_all_npc.insert(a);
+}
+void Grid::addForbidden(Tile t) {
+	forbidden.insert(t);
+}
+void Grid::reserveGoal(Tile a) {
+	reserved_goals.insert(a);
+}
+void Grid::addDeadEnd(Tile a) {
+	deadEnd.insert(a);
+}
+
+
 EHexCellDirection chooseDirection(std::vector<Tile>& path, SNPCInfo& npc) {
 
 	Tile next;

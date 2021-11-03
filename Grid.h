@@ -100,22 +100,11 @@ public:
 	bool isDeadEnd(const Tile& t);
 	std::vector<Tile> neighbors(Tile id) const;
 
-	inline void reserveNext(Tile a) {
-		reserved.insert(a);
-	}
-	inline void visitNext(Tile a, int i) {
-		visited[i].push_back(a);
-		visited_all_npc.insert(a);
-	}
-	inline void addForbidden(Tile t) {
-		forbidden.insert(t);
-	}
-	inline void reserveGoal(Tile a) {
-		reserved_goals.insert(a);
-	}
-	inline void addDeadEnd(Tile a) {
-		deadEnd.insert(a);
-	}
+	void reserveNext(Tile a);
+	void visitNext(Tile a, int i);
+	void addForbidden(Tile t);
+	void reserveGoal(Tile a);
+	void addDeadEnd(Tile a);
 	
 	static Grid& get();
 };

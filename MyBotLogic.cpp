@@ -41,11 +41,6 @@ void MyBotLogic::Configure(const SConfigData& _configData)
 
 
 
-
-
-Grid& grid = Grid::get();
-Selector behaviourTree;
-
 void MyBotLogic::Init(const SInitData& _initData)
 {
 	
