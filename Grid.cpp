@@ -68,7 +68,7 @@ void Grid::InitGrid(const SInitData& _initData) {
 }
 
 void Grid::updateGrid(const STurnData& turnInfo) {
-	int temp = goals.size(), q, r;
+	int temp = static_cast<int>(goals.size()), q, r;
 	for (int i = 0; i < turnInfo.tileInfoArraySize; i++) {
 		q = turnInfo.tileInfoArray[i].q;
 		r = turnInfo.tileInfoArray[i].r;
