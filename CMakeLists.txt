@@ -36,15 +36,16 @@ SET( AIBOT_HEADERS
 	TurnData.h
 	Grid.h
 	A_star.h
-	A_star_to_goal.h
-	HasPath.h
-	Move_to_goal.h
-	Move_to_next.h
-	NewGoalVisible.h
-	Selector.h
-	Sequence.h
-	Task.h
-	UpdateGrid.h
+	
+	BehaviorTree/A_star_to_goal.h
+	BehaviorTree/HasPath.h
+	BehaviorTree/Move_to_goal.h
+	BehaviorTree/Move_to_next.h
+	BehaviorTree/NewGoalVisible.h
+	BehaviorTree/Selector.h
+	BehaviorTree/Sequence.h
+	BehaviorTree/Task.h
+	BehaviorTree/UpdateGrid.h
 	
 	#DLL Stuff
 	Interop_API.h	
@@ -59,14 +60,15 @@ SET( AIBOT_SRC
 	Logger.cpp
 	MyBotLogic.cpp
 	Grid.cpp
-	A_star_to_goal.cpp
-	HasPath.cpp
-	Move_to_goal.cpp
-	Move_to_next.cpp
-	NewGoalVisible.cpp
-	Selector.cpp
-	Sequence.cpp
-	UpdateGrid.cpp
+	
+	BehaviorTree/A_star_to_goal.cpp
+	BehaviorTree/HasPath.cpp
+	BehaviorTree/Move_to_goal.cpp
+	BehaviorTree/Move_to_next.cpp
+	BehaviorTree/NewGoalVisible.cpp
+	BehaviorTree/Selector.cpp
+	BehaviorTree/Sequence.cpp
+	BehaviorTree/UpdateGrid.cpp
 
 	#DLL Stuff
 	dllmain.cpp

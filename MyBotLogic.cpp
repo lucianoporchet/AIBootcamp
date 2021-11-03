@@ -7,14 +7,14 @@
 
 #include "Grid.h"
 #include "A_star.h"
-#include "Selector.h"
-#include "Sequence.h"
-#include "A_star_to_goal.h"
-#include "UpdateGrid.h"
-#include "NewGoalVisible.h"
-#include "HasPath.h"
-#include "Move_to_goal.h"
-#include "Move_to_next.h"
+#include "BehaviorTree/Selector.h"
+#include "BehaviorTree/Sequence.h"
+#include "BehaviorTree/A_star_to_goal.h"
+#include "BehaviorTree/UpdateGrid.h"
+#include "BehaviorTree/NewGoalVisible.h"
+#include "BehaviorTree/HasPath.h"
+#include "BehaviorTree/Move_to_goal.h"
+#include "BehaviorTree/Move_to_next.h"
 
 
 

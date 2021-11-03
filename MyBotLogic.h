@@ -3,7 +3,7 @@
 #include "BotLogicIF.h"
 #include "Logger.h"
 #include "Grid.h"
-#include "Selector.h"
+#include "BehaviorTree/Selector.h"
 
 #ifdef _DEBUG
 #define BOT_LOGIC_DEBUG
